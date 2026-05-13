@@ -1,1 +1,50 @@
-<!DOCTYPE html> <html lang="ar" dir="rtl"> <head> <meta charset="UTF-8"> <title>همم كير</title> <script> window.location.href = "https://mouza3344.github.io/himam-care/himam-care-v2.html"; </script> </head> <body>جاري التحميل...</body> </html> 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>همم كير</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cairo',sans-serif;background:#0B1F3A;display:flex;align-items:center;justify-content:center;min-height:100vh;direction:rtl}
+.box{background:#fff;border-radius:20px;padding:40px;max-width:400px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.logo{font-size:50px;margin-bottom:16px}
+h1{font-size:24px;font-weight:900;color:#0B1F3A;margin-bottom:8px}
+p{color:#6B7E95;font-size:14px;margin-bottom:24px}
+.btn{display:block;background:linear-gradient(135deg,#0A7C6E,#12A98E);color:#fff;padding:14px;border-radius:12px;font-family:'Cairo',sans-serif;font-size:15px;font-weight:700;border:none;cursor:pointer;width:100%;margin-bottom:10px;text-decoration:none}
+.status{padding:10px;border-radius:8px;font-size:12px;margin-top:10px}
+.ok{background:#E6F6EE;color:#2E9E6A}
+.err{background:#FEE8E8;color:#E05252}
+#msg{display:none}
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="logo">♾️</div>
+  <h1>همم كير</h1>
+  <p>منصة الرعاية المتكاملة لأصحاب الهمم</p>
+  <button class="btn" onclick="test()">🔌 اختبار الاتصال بقاعدة البيانات</button>
+  <div id="msg" class="status"></div>
+</div>
+<script>
+async function test(){
+  const m=document.getElementById('msg');
+  m.style.display='block';
+  m.className='status';
+  m.textContent='جاري الاتصال...';
+  try{
+    const r=await fetch('https://dngqrljgzmsrzkkxzsyb.supabase.co/rest/v1/patients?select=id&limit=1',{
+      headers:{
+        'apikey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRuZ3FybGpnem1zcnpra3h6c3liIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1NzcyMDQsImV4cCI6MjA5NDE1MzIwNH0.UmxtxNuJAjMwSsIa0c-Db6z918g6ZV1DRovM_qsMNnw',
+        'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRuZ3FybGpnem1zcnpra3h6c3liIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1NzcyMDQsImV4cCI6MjA5NDE1MzIwNH0.UmxtxNuJAjMwSsIa0c-Db6z918g6ZV1DRovM_qsMNnw'
+      }
+    });
+    if(r.ok){m.className='status ok';m.textContent='✅ الاتصال ناجح! قاعدة البيانات تعمل';}
+    else{m.className='status err';m.textContent='❌ خطأ: '+r.status+' '+r.statusText;}
+  }catch(e){m.className='status err';m.textContent='❌ '+e.message;}
+}
+</script>
+</body>
+</html>
+
